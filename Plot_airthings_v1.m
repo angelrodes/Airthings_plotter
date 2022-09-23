@@ -193,5 +193,6 @@ yticklabels([])
 grid on
 set(gca, 'YColor','w');
 
+pause(3)
 waitforbuttonpress () % do not close if started as a pipe (eg: wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v1.m | octave)
 
