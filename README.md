@@ -6,15 +6,19 @@ A Matlab/Octave script that plots raw data provided by Airthings Wave air qualit
 
 ## How to use
 
-1. Follow the instructions from your Airthings Wave Plus monitor ans setup the app in your phone. Create a new account if you don't have one.
+1. Follow the instructions from your Airthings Wave Plus monitor to setup the app in your phone. Create a new account if you don't have one.
 2. After a few hours, you can log in and see your data online at [dashboard.airthings.com](https://dashboard.airthings.com/)
 3. Download your by clicking "Export to CSV":
-![image](https://user-images.githubusercontent.com/53089531/191991436-8d520cce-e0a9-4901-9a91-c6e558ce6c81.png)
-4. Run the script ```Plot_airthings_v1.m``` in MATLAB or octave to get your raw data plotted.
+![image](https://user-images.githubusercontent.com/53089531/191995763-0887d323-0b59-41bb-aa67-84ccd3095d4e.png)
+4. Run the script ```Plot_airthings_v1.m``` in MATLAB or Octave to get your raw data plotted.
 
 ## Output
 
-The script let you choose how many days to plot:
+The script will ask you where is the CSV file:
+
+![image](https://user-images.githubusercontent.com/53089531/191996233-8f77abce-fcce-444a-b8ef-7f97279a4713.png)
+
+It also lets you choose how many days to plot:
 
 ![image](https://user-images.githubusercontent.com/53089531/191992157-b0210de1-4d3d-471a-814c-ede03e683d81.png)
 
