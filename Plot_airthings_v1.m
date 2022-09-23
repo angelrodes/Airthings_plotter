@@ -193,4 +193,4 @@ yticklabels([])
 grid on
 set(gca, 'YColor','w');
 
- questdlg ('done')
+input ('Done. Press any key to exit.') % avoid closing everything if the script is run as "octave start"
