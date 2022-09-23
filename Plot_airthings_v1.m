@@ -112,7 +112,7 @@ posix_time_limits=[max(min(posix_time),max(posix_time)-daysback*24*60*60) max(po
 Rn_limits=[0 max(max(Rn)+10,100)];
 T_limits=[min(T)-0.5 max(T)+0.5];
 H_limits=[0 100];
-P_limits=[min(P)-10 max(P)+10];
+P_limits=[min(P)-range(P)/10 max(P)+range(P)/10];
 CO2_limits=[min(min(CO2)-10,400) max(CO2)+10];
 VOC_limits=[0 max(max(VOC)+10,100)];
 
