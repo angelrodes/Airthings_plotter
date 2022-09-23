@@ -181,10 +181,10 @@ for n=1:size(year_month_day_hour,1)
         end
     end
 end
-text(min(posix_time_limits),4,'Year', 'HorizontalAlignment', 'right','Color','k')
-text(min(posix_time_limits),3,'Month', 'HorizontalAlignment', 'right','Color','k')
-text(min(posix_time_limits),2,'Day', 'HorizontalAlignment', 'right','Color','k')
-text(min(posix_time_limits),1,'Hour', 'HorizontalAlignment', 'right','Color','k')
+text(min(posix_time_limits),4,'Year ', 'HorizontalAlignment', 'right','Color','k')
+text(min(posix_time_limits),3,'Month ', 'HorizontalAlignment', 'right','Color','k')
+text(min(posix_time_limits),2,'Day ', 'HorizontalAlignment', 'right','Color','k')
+text(min(posix_time_limits),1,'Hour ', 'HorizontalAlignment', 'right','Color','k')
 xlim(posix_time_limits)
 ylim([0 4])
 xticklabels([])
