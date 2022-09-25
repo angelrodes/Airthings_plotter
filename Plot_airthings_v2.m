@@ -149,7 +149,7 @@ rounding_correction=-sum(Rn2(Rn2<0));
 Rn2(Rn2<0)=0;
 Rn2(Rn2>0)=Rn2(Rn2>0)-rounding_correction/sum(Rn2>0);
 
-% calculate the 6h average Rn6h its estimated uncertainty
+% calculate the 6h moving average Rn6h its estimated uncertainty
 step=0;
 Rn2_index=find(~isnan(Rn2))';
 Rn6h=zeros(size(Rn2))*NaN;
@@ -157,8 +157,9 @@ Rn6h_uncert=zeros(size(Rn2))*NaN;
 N6=6;
 for n=find(~isnan(Rn2))'
   step=step+1;
-  Rn6h(n)=mean(Rn2(Rn2_index(max(1,step-N6+1):step)));
-  Rn6h_uncert(n)=Rn6h(n)*1/(max(1,Rn6h(n)/100*numel(max(1,step-N6+1):step)))^0.5; % assuming one count per 100 Bq/m3 per hour
+  select=(max(1,step-N6/2):min(step+N6/2,sum(~isnan(Rn2)))); % moving average range
+  Rn6h(n)=mean(Rn2(Rn2_index(select))); % select 6 hour data around
+  Rn6h_uncert(n)=Rn6h(n)*1/(max(1,Rn6h(n)/100*numel(select)))^0.5; % assuming one count per 100 Bq/m3 per hour
 end
 
 % re do the 24h moving average (RN_test) to test my calculations
@@ -302,7 +303,7 @@ plot([posix_time(valid),NaN,posix_time(valid)],...
 '--g','LineWidth',2)
 
 
-legend('Reported 24h average','Modeled 24h average','Instant 1h data','6h average','6h uncertainty','Location','northwest')
+legend('Reported 24h average','Modeled 24h average','Instant 1h data','6h moving average','6h uncertainty','Location','northwest')
 
 xlim(posix_time_limits)
 ylim(Rn2_limits)
@@ -345,6 +346,8 @@ yticklabels([])
 grid on
 set(gca, 'YColor','w');
 xlabel('UTC time')
+
+%% wait to exit
 pause(3)
 waitforbuttonpress () % do not close if started as a pipe (eg: wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v1.m | octave)
 
