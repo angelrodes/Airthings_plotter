@@ -145,6 +145,7 @@ end
 end
 
 % Remove negative data. These are probably artifacts due to rounding.
+Raw_Rn2=Rn2; % keep "raw" data for testing
 rounding_correction=-sum(Rn2(Rn2<0));
 Rn2(Rn2<0)=0;
 Rn2(Rn2>0)=Rn2(Rn2>0)-rounding_correction/sum(Rn2>0);
@@ -346,6 +347,26 @@ yticklabels([])
 grid on
 set(gca, 'YColor','w');
 xlabel('UTC time')
+
+%% test scatter and compare with assumption (1 count per hour for each 100 Bq/m3)
+%figure
+%hold on
+%values=Raw_Rn2(Raw_Rn2>0);
+%plot(values(2:end),abs(diff(values))./(values(1:end-1)+values(2:end))*200,'*r')
+%ref=0:max(Rn2_limits);
+%expected=100./(ref/100).^0.5;
+%plot(ref,expected,'-g')
+%xlabel('Rn [Bq/m^3]')
+%ylabel('% scatter')
+%xlim(Rn2_limits)
+%ylim([0 200])
+
+%model=100./(((values(1:end-1)+values(2:end)))/200).^0.5;
+%observed=abs(diff(values))./(values(1:end-1)+values(2:end))*200;
+%figure
+%hold on
+%hist(model-observed,20)
+%xlabel('Expected(100 Bq/m3/h) - Scatter [%]')
 
 %% wait to exit
 pause(3)
