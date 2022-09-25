@@ -31,7 +31,7 @@ The first figure looks like this:
 
 A second figure with the Radon data and calculated values is also produced (v2 only):
 
-![imagen](https://user-images.githubusercontent.com/53089531/192147052-afa10d96-bd8a-4f7c-b348-3180d7a2236f.png)
+![imagen](https://user-images.githubusercontent.com/53089531/192149940-fcef0aec-8511-4294-acb7-5dbad4b8a7e2.png)
 
 See below for an explanation of the short term data.
 
