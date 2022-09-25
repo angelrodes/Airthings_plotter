@@ -15,6 +15,12 @@ Version 2 of the script also *undo* the 24h average of the Radon data. "Instant"
 ![image](https://user-images.githubusercontent.com/53089531/191995763-0887d323-0b59-41bb-aa67-84ccd3095d4e.png)
 4. Run the script ```Plot_airthings_v2.m``` in MATLAB or Octave to get your raw data plotted.
 
+If you are using Linux and you have Octave installed, you can just run this in your terminal:
+
+```bash
+wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v2.m | octave
+```
+
 ## Output
 
 The script will ask for the CSV file:
