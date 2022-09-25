@@ -59,6 +59,12 @@ As these detectors calculate the Radon concentrations based on alpha particle co
 
 If we assume a conserviative precision of 10% on the reported 24h measurements, "instant" 1h-data should yield about 50% uncertainties. Obviusly, this uncertainty shuld decrease with higher Radon concentrations. In our initial tests, the scatter of the generated 1h-data seem to rougly reflect these 50% uncertainties for values around 500 Bq/m3 (see last plot above). This implies that, *very rougly*, 1 event is detected per hour for each 100 Bq/m3 concentration.
 
-Following the same principle, 6h moving averages (solid green line) should have around 20% uncertainties (dashed green line). Uncertainties are calculated assuming  ``` N = [Rn]/100 * Δt```, being ```[Rn]``` the concentration in Bq/m3 and ```Δt``` the number of 1h data points considered.
+Scatter of teh "1h data" in our initial tests and assumed uncertainty based on 1 count per 100 Bq/m3:
+
+![image](https://user-images.githubusercontent.com/53089531/192155481-4bb32e3d-6e3a-43b5-9bd9-f633d1359bd3.png)
+
+Following the same principle, 6h moving averages (solid green line in the plot below) should have around 20% uncertainties (dashed green lines). Uncertainties are calculated assuming  ``` N = [Rn]/100 * Δt```, being ```[Rn]``` the concentration in Bq/m3 and ```Δt``` the number of 1h data points considered.
+
+![image](https://user-images.githubusercontent.com/53089531/192155570-eee26339-dc1d-4f6a-90d3-a38e16f0e873.png)
 
 **6h moving average is plotted to test short-term "experiments".** This value is calculated as an average of 7 1h-data-points: from 3 hours before to 3 hours after. Therefore, **this is a moving average, not the average of the previous 6 hours.** Consequently, first and last 6h averages are the average of the first and last 4 data points respectively.
