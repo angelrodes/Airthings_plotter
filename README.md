@@ -2,7 +2,7 @@
 
 A Matlab/Octave script that plots raw data provided by Airthings Wave air quality monitor.
 
-The script also *undo* the 24h average of the Radon data. "Instant" 1h data and corresponding 6h averages are also plotted.
+Version 2 of the script also *undo* the 24h average of the Radon data. "Instant" 1h data and corresponding 6h averages are also plotted.
 
 Ángel Rodés, 2022 \
 [www.angelrodes.com](https://www.angelrodes.com/)
@@ -13,7 +13,7 @@ The script also *undo* the 24h average of the Radon data. "Instant" 1h data and 
 2. After a few hours, you can log in and see your data online at [dashboard.airthings.com](https://dashboard.airthings.com/)
 3. Download your by clicking "Export to CSV":
 ![image](https://user-images.githubusercontent.com/53089531/191995763-0887d323-0b59-41bb-aa67-84ccd3095d4e.png)
-4. Run the script ```Plot_airthings_v1.m``` in MATLAB or Octave to get your raw data plotted.
+4. Run the script ```Plot_airthings_v2.m``` in MATLAB or Octave to get your raw data plotted.
 
 ## Output
 
@@ -29,7 +29,7 @@ The first figure looks like this:
 
 ![image](https://user-images.githubusercontent.com/53089531/191994587-eac1e5b2-b108-4b6a-88e7-ed3a6049b0fd.png)
 
-A second figure with the Radon data and calculated values is also produced:
+A second figure with the Radon data and calculated values is also produced (v2 only):
 
 ![imagen](https://user-images.githubusercontent.com/53089531/192147052-afa10d96-bd8a-4f7c-b348-3180d7a2236f.png)
 
@@ -43,7 +43,7 @@ Your csv should look like this:
 
 If you have a different model you might get other data, or data separated by comma (,) instead of semicolon (;). If that is the case, you can change the first lines of the "load data" and "plot sttuff" sections in the script to make it work with you monitor.
 
-## Calculated short-term Radon data
+## Calculated short-term Radon data in version 2
 
 Airthings detector are [designed, made and sold to collect long term averages](https://help.airthings.com/en/articles/3119759-radon-how-is-radon-measured-how-does-an-airthings-device-measure-radon). That is why the detector reports 24h averages. Actually, [Airthings](https://www.airthings.com/) recommends to use their productos for a month to get accurate measurements.
 
