@@ -226,7 +226,7 @@ for plot_number=1:6
   
   ylabel(title_string)
   
-  % xticks(posix_time(newday==1))
+  xticks(posix_time(newday==1))
   
   % if plot_number==6
   %     xticklabels(timestrings(newday==1))
@@ -266,6 +266,7 @@ text(min(posix_time_limits),2,'Day ', 'HorizontalAlignment', 'right','Color','k'
 text(min(posix_time_limits),1,'Hour ', 'HorizontalAlignment', 'right','Color','k')
 xlim(posix_time_limits)
 ylim([0 4])
+xticks(posix_time(newday==1))
 xticklabels([])
 yticks([])
 yticklabels([])
@@ -342,6 +343,7 @@ text(min(posix_time_limits),2,'Day ', 'HorizontalAlignment', 'right','Color','k'
 text(min(posix_time_limits),1,'Hour ', 'HorizontalAlignment', 'right','Color','k')
 xlim(posix_time_limits)
 ylim([0 4])
+xticks(posix_time(newday==1))
 xticklabels([])
 yticks([])
 yticklabels([])
