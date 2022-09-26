@@ -108,10 +108,10 @@ for n=1:numel(timestrings)
   previousday=dd;
 end
 
-% decide how many "new days" to show
-while sum(newday)>10 % if there are more than 8 days
-  newday(mod(cumsum([newday,1]),2)>0)=0; % reduce the number of ticks by 2
-end
+% % decide how many "new days" to show in the grid
+% while sum(newday)>10 % if there are more than 8 days
+%  newday(mod(cumsum([newday,1]),2)>0)=0; % reduce the number of ticks by 2
+%end
 newday(end)=1; % always show last
 newday(1)=1; % always show first
 
@@ -173,7 +173,8 @@ for n=find(~isnan(Rn2))'
 end
 
 %% ask for days to plot
-answer = inputdlg('How many days back?','Days',1,{num2str(sum(newday))});
+default_answer=min(7,sum(newday));
+answer = inputdlg('How many days back?','Days',1,{num2str(default_answer)});
 if ~isempty(answer)
   daysback=str2double(answer);
 else
