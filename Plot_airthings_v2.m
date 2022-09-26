@@ -184,7 +184,7 @@ end
 %% set plotting limits
 posix_time_limits=[max(min(posix_time),max(posix_time)-daysback*24*60*60) max(posix_time)];
 Rn_limits=[-5 max(max(Rn)*1.15,50)];
-Rn2_limits=[-5 max(max(Rn2)*1.15,50)];
+Rn2_limits=[-5 max(max(Rn2)*1.05,50)];
 T_limits=[min(T)-0.5 max(T)+0.5];
 H_limits=[0 100];
 P_limits=[min(P)-range(P)/10 max(P)+range(P)/10];
