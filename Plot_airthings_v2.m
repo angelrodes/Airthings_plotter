@@ -373,6 +373,7 @@ xlabel('UTC time')
 
 %% wait to exit
 pause(3)
-waitforbuttonpress () % do not close if started as a pipe (eg: wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v1.m | octave)
+disp('Press Ctrl+C to exit')
+waitforbuttonpress () % do not close if started as a pipe (eg: wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v2.m | octave)
 
 
