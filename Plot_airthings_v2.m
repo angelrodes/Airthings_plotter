@@ -293,7 +293,7 @@ end
 valid=~isnan(Rn);
 plot(posix_time(valid),Rn(valid),'-b','LineWidth',2)
 valid=~isnan(Rn_test);
-plot(posix_time(valid),Rn_test(valid),':k','LineWidth',1) % test inverse 24h average
+plot(posix_time(valid),Rn_test(valid),'.k','LineWidth',1) % test inverse 24h average
 valid=~isnan(Rn3);
 plot(posix_time(valid),Rn3(valid),'-r','LineWidth',1)
 valid=~isnan(Rn6h);
@@ -301,7 +301,7 @@ plot(posix_time(valid),Rn6h(valid),'-g','LineWidth',2)
 valid=~isnan(Rn6h_uncert);
 plot([posix_time(valid),NaN,posix_time(valid)],...
 [Rn6h(valid)'-Rn6h_uncert(valid)',NaN,Rn6h(valid)'+Rn6h_uncert(valid)'],...
-':g','LineWidth',2)
+'-g','LineWidth',1)
 
 
 legend('Reported 24h average','Modeled 24h average','Instant 1h data','6h moving average','6h uncertainty','Location','northwest')
