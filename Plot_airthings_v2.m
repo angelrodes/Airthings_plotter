@@ -293,7 +293,7 @@ end
 valid=~isnan(Rn);
 plot(posix_time(valid),Rn(valid),'-b','LineWidth',2)
 valid=~isnan(Rn_test);
-plot(posix_time(valid),Rn_test(valid),'.k','LineWidth',1) % test inverse 24h average
+plot(posix_time(valid),Rn_test(valid),':k','LineWidth',1) % test inverse 24h average
 valid=~isnan(Rn3);
 plot(posix_time(valid),Rn3(valid),'-r','LineWidth',1)
 valid=~isnan(Rn6h);
