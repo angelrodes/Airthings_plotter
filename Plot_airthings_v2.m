@@ -301,7 +301,7 @@ plot(posix_time(valid),Rn6h(valid),'-g','LineWidth',2)
 valid=~isnan(Rn6h_uncert);
 plot([posix_time(valid),NaN,posix_time(valid)],...
 [Rn6h(valid)'-Rn6h_uncert(valid)',NaN,Rn6h(valid)'+Rn6h_uncert(valid)'],...
-'--g','LineWidth',2)
+':g','LineWidth',2)
 
 
 legend('Reported 24h average','Modeled 24h average','Instant 1h data','6h moving average','6h uncertainty','Location','northwest')
