@@ -68,3 +68,16 @@ Following the same principle, 6h moving averages (solid green line in the plot b
 ![image](https://user-images.githubusercontent.com/53089531/192155570-eee26339-dc1d-4f6a-90d3-a38e16f0e873.png)
 
 **6h moving average is plotted to test short-term "experiments".** This value is calculated as an average of 7 1h-data-points: from 3 hours before to 3 hours after. Therefore, **this is a moving average, not the average of the previous 6 hours.** Consequently, first and last 6h averages are the average of the first and last 4 data points respectively.
+
+## changelog
+
+Version 2: 
+
+- Includes the calculation of 1h data
+- Include a second plot with Radon data only.
+- Plots the 6h moving average.
+
+Version 3: 
+
+- 6h moving average replaced by smoothed 12h average.
+- Added day of week to Radon plots.
