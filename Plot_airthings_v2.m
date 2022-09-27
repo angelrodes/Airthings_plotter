@@ -310,7 +310,9 @@ plot([posix_time(valid),NaN,posix_time(valid)],...
 legend('Reported 24h average','Modeled 24h average','Instant 1h data','6h moving average','6h uncertainty','Location','northwest')
 
 xlim(posix_time_limits)
-ylim(Rn2_limits)
+% ylim(Rn2_limits)
+ylim([0 max(Rn6h+Rn6h_uncert)*1.05])
+
 box on
 grid on
 
@@ -491,5 +493,4 @@ end
 pause(3)
 disp('Press Ctrl+C to exit')
 waitforbuttonpress () % do not close if started as a pipe (eg: wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v2.m | octave)
-
 
