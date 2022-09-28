@@ -16,7 +16,7 @@ disp('    https://dashboard.airthings.com/devices/')
 % first check if this is my computer
 [ret, name] = system('hostname');
 
-if strcmp(name(1:15),'angel-EliteBook')==1
+if strcmp(name(1:15),'angel-EliteBook')==1 || strcmp(name(1:16),'angel-HP-Oficina')==1
     mylaptop=1;
 elseif strcmp(name(1:14),'angel-Inspiron')==1
     mylaptop=2;
