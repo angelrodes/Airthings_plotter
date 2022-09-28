@@ -79,7 +79,7 @@ for n=1:numel(timestrings)
     else % if there is somthing wring with the date string
         mm=mm+5; % just add 5 minutes
         VOC(n-1)=NaN; % and remove last data (probably taken from the begining of the date string)
-        day_in_week(n)=wday_in_week(n-1);
+        day_in_week(n)=day_in_week(n-1);
     end
     
     year_month_day_hour(n,1:4)=[yyyy,MM,dd,HH]; % plotting purposes
