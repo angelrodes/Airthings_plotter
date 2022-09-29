@@ -65,7 +65,9 @@ disp(['Last update: ' timestrings{end}])
 
 
 % get times 'yyyy-MM-ddTHH:mm:ss'
+h = waitbar(0,'Getting times from file...');
 for n=1:numel(timestrings)
+  waitbar(n/numel(timestrings),h)
     thiscell=timestrings(n);
     string=thiscell{1};
     if numel(string)>18
@@ -110,6 +112,7 @@ for n=1:numel(timestrings)
     end
     previousday=dd;
 end
+close(h)
 
 % % decide how many "new days" to show in the grid
 % while sum(newday)>10 % if there are more than 8 days
@@ -123,8 +126,9 @@ step=0;
 N=23; % number of readings in the moving average time (24h)
 Rn2=zeros(size(Rn))*NaN;
 Rn_index=find(~isnan(Rn))';
-
+h = waitbar(0,'Calculating 1h Radon data...');
 for n=find(~isnan(Rn))'
+    waitbar(n/max(find(~isnan(Rn))),h);
     step=step+1;
     if Rn_index(step)~=n
         warning(['Wrong index ' num2str(n) ' in step=' num2str(step) ]) % check indexes
@@ -141,7 +145,7 @@ for n=find(~isnan(Rn))'
     step_value=max(0,step_value); % avoid negative data
     Rn2(max(1,Rn_index(max(1,step-1))+1):Rn_index(step))=step_value;
 end
-
+close(h)
 
 % calculate the 6h moving average
 y=Rn2';
@@ -172,6 +176,7 @@ for i=1:length (y)
     yy(i) = mean (y(idx1:idx2));
 end
 Rn_moving_av=yy';
+Rn_moving_av_uncert=Rn_moving_av.*(1./(max(1,6*Rn_moving_av/100)).^0.5);
 
 % re do the 24h moving average (RN_test) to test my calculations
 step=0;
@@ -294,21 +299,12 @@ hold on
 subplot(7,1,[1 6])
 hold on
 
-% Rn3=Rn2; % plot 1 hour values as steps Rn3
-% for n=find(~isnan(Rn2),1,'last'):-1:1
-%     if isnan(Rn2(n))
-%         Rn3(n)=next_value;
-%     else
-%         next_value=Rn2(n);
-%     end
-% end
-
 valid=~isnan(Rn);
 plot(posix_time(valid),Rn(valid),'-b','LineWidth',2)
 valid=~isnan(Rn_test);
 plot(posix_time(valid),Rn_test(valid),':g','LineWidth',1) % test inverse 24h average
 valid=~isnan(Rn2);
-plot(posix_time(valid),Rn2(valid),'-','Color',[0.75 0.75 0.75],'LineWidth',1)
+plot(posix_time(valid),Rn2(valid),'-','Color',[0.5 0.5 0.5],'LineWidth',2)
 valid=~isnan(Rn_moving_av);
 plot(posix_time(valid),Rn_moving_av(valid),'-r','LineWidth',2)
 % valid=~isnan(Rn12h);
@@ -320,9 +316,12 @@ plot(posix_time(valid),Rn_moving_av(valid),'-r','LineWidth',2)
 
 
 % legend('Reported 24h average','Modeled 24h average','Instant 1h data','12h moving average','12h uncertainty','Location','northwest')
-legend('Reported 24h average','Modeled 24h average','Instant 1h data',moving_av_label,'Location','northwest')
+legend('Reported 24h average','Modeled 24h average','Instant 1h data',moving_av_label,'AutoUpdate','off','Location','northwest')
 
-
+% plot uncertainty
+valid=~isnan(Rn_moving_av);
+plot(posix_time(valid),Rn_moving_av(valid)+Rn_moving_av_uncert(valid),':r','LineWidth',1)
+plot(posix_time(valid),Rn_moving_av(valid)-Rn_moving_av_uncert(valid),':r','LineWidth',1)
 
 xlim(posix_time_limits)
 % ylim(Rn2_limits)
@@ -422,124 +421,9 @@ xlabel('UTC time')
 %hist(model-observed,20)
 %xlabel('Expected(100 Bq/m3/h) - Scatter [%]')
 
-% %% plot my own graph
-% 
-% if mylaptop>0
-%     figure('units','normalized','outerposition',[0 0 1 1],'Name','Radon data')
-%     set(gcf,'color','w');
-%     hold on
-%     
-%     subplot(7,1,[1 6])
-%     hold on
-%     
-%     valid=~isnan(Rn);
-%     plot(posix_time(valid),Rn(valid),'-k','LineWidth',2)
-%     
-%     valid=~isnan(Rn12h);
-%     plot(posix_time(valid),Rn12h(valid),'-b','LineWidth',2)
-%     
-%     legend('Reported 24h average','12h moving average','AutoUpdate','off','Location','northwest')
-%     
-%     for alpha=linspace(-1,1,100) % uncertainty
-%         plot(posix_time(valid),Rn12h(valid)+Rn12h_uncert(valid)*alpha,'-','Color',[0.7 0.7 0.7],'LineWidth',2)
-%     end
-%     
-%     
-%     valid=~isnan(Rn12h);
-%     plot(posix_time(valid),Rn12h(valid),'-b','LineWidth',2)
-%     
-%     valid=~isnan(Rn);
-%     plot(posix_time(valid),Rn(valid),'-k','LineWidth',2)
-%     
-%     plot(posix_time,posix_time.*0+100,'--g','LineWidth',1)
-%     plot(posix_time,posix_time.*0+200,'--y','LineWidth',1)
-%     plot(posix_time,posix_time.*0+300,'--r','LineWidth',1)
-%     
-%     
-%     xlim(posix_time_limits)
-%     ylim([0 max(Rn12h+Rn12h_uncert)*1.05])
-%     box on
-%     grid on
-%     
-%     ylabel('Rn [Bq/m^3]')
-%     xticks(posix_time(newday==1))
-%     xticklabels([])
-%     
-%     % timestamps
-%     subplot(7,1,7)
-%     hold on
-%     
-%     
-%     for n=1:size(year_month_day_hour,1)
-%         if n==1
-%             for j=1:3
-%                 text(posix_time(n),5-j,num2str(year_month_day_hour(n,j)),'Color','b')
-%             end
-%         elseif n<size(year_month_day_hour,1)
-%             for j=1:4
-%                 if year_month_day_hour(n,j)~=year_month_day_hour(n-1,j)
-%                     if j<4
-%                         text(posix_time(n),5-j,num2str(year_month_day_hour(n,j)),'Color','b')
-%                     else
-%                         if year_month_day_hour(n,j)==22 % CET time
-%                             text(posix_time(n),5-j,'0','Color','b', 'HorizontalAlignment', 'center')
-%                         elseif year_month_day_hour(n,j)==4
-%                             text(posix_time(n),5-j,'6','Color','b', 'HorizontalAlignment', 'center')
-%                         elseif year_month_day_hour(n,j)==10
-%                             text(posix_time(n),5-j,'12','Color','b', 'HorizontalAlignment', 'center')
-%                         elseif year_month_day_hour(n,j)==16
-%                             text(posix_time(n),5-j,'18','Color','b', 'HorizontalAlignment', 'center')
-%                         end
-%                     end
-%                 end
-%             end
-%             if day_in_week(n)~=day_in_week(n-1)
-%                 switch day_in_week(n)
-%                     case 1
-%                         text(posix_time(n),5,'Sun.','Color','r')
-%                     case 2
-%                         text(posix_time(n),5,'Mon.','Color','k')
-%                     case 3
-%                         text(posix_time(n),5,'Tue.','Color','k')
-%                     case 4
-%                         text(posix_time(n),5,'Wed.','Color','k')
-%                     case 5
-%                         text(posix_time(n),5,'Thu.','Color','k')
-%                     case 6
-%                         text(posix_time(n),5,'Fri.','Color','k')
-%                     case 7
-%                         text(posix_time(n),5,'Sat.','Color','r')
-%                     otherwise
-%                         text(posix_time(n),5,'???','Color','r')
-%                 end
-%                 
-%             end
-%         else
-%             for j=1:3
-%                 text(posix_time(n),5-j,num2str(year_month_day_hour(n,j)),'Color','b')
-%             end
-%         end
-%     end
-%     text(min(posix_time_limits),4,'Year ', 'HorizontalAlignment', 'right','Color','k')
-%     text(min(posix_time_limits),3,'Month ', 'HorizontalAlignment', 'right','Color','k')
-%     text(min(posix_time_limits),2,'Day ', 'HorizontalAlignment', 'right','Color','k')
-%     text(min(posix_time_limits),1,'Hour ', 'HorizontalAlignment', 'right','Color','k')
-%     xlim(posix_time_limits)
-%     ylim([0 4])
-%     xticks(posix_time(newday==1))
-%     xticklabels([])
-%     yticks([])
-%     yticklabels([])
-%     grid on
-%     set(gca, 'YColor','w');
-%     xlabel('CET time')
-%     
-% end
 
 
 %% wait to exit
 pause(3)
 disp('Press Ctrl+C to exit')
 waitforbuttonpress () % do not close if started as a pipe (eg: wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v2.m | octave)
-
-
