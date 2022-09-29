@@ -81,3 +81,9 @@ Version 3:
 
 - 6h moving average replaced by smoothed 12h average.
 - Added day of week to Radon plots.
+
+Version 4:
+
+- Improved the inverse method to *guess* the "instant 1h data". No need for later correction of negative data.
+- Back to 6h moving average.
+- Colours changed.
