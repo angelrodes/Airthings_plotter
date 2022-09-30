@@ -18,7 +18,7 @@ Version 2 of the script also *undo* the 24h average of the Radon data. "Instant"
 If you are using Linux and you have Octave installed, you can just run this in your terminal:
 
 ```bash
-wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v2.m | octave
+wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v4.m | octave
 ```
 
 ## Output
