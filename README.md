@@ -35,7 +35,7 @@ The first figure looks like this:
 
 ![image](https://user-images.githubusercontent.com/53089531/191994587-eac1e5b2-b108-4b6a-88e7-ed3a6049b0fd.png)
 
-A second figure with the Radon data and calculated values is also produced (v2 only):
+A second figure with the Radon data and calculated values is also produced (from v2):
 
 ![imagen](https://user-images.githubusercontent.com/53089531/192149940-fcef0aec-8511-4294-acb7-5dbad4b8a7e2.png)
 
