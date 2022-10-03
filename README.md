@@ -18,7 +18,7 @@ Version 2 of the script also *undo* the 24h average of the Radon data. "Instant"
 If you are using Linux and you have Octave installed, you can just run this in your terminal:
 
 ```bash
-wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v4.m | octave
+wget -O - https://raw.githubusercontent.com/angelrodes/Airthings_plotter/main/Plot_airthings_v5.m | octave
 ```
 
 ## Output
@@ -87,3 +87,8 @@ Version 4:
 - Improved the inverse method to *guess* the "instant 1h data". No need for later correction of negative data.
 - Back to 6h moving average.
 - Colours changed.
+
+Version 4:
+
+- Improved the inverse method to *guess* the "instant 1h data": now this is calculated for each 5 minutes (300 seconds), even if we have gaps in the data reported.
+- Added a Black & Wite version of the Radon plot if mylaptop>0.
