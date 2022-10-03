@@ -88,7 +88,7 @@ Version 4:
 - Back to 6h moving average.
 - Colours changed.
 
-Version 4:
+Version 5:
 
 - Improved the inverse method to *guess* the "instant 1h data": now this is calculated for each 5 minutes (300 seconds), even if we have gaps in the data reported.
 - Added a Black & Wite version of the Radon plot if mylaptop>0.
