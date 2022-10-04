@@ -181,7 +181,7 @@ for i=1:length (y)
     yy(i) = mean (y(idx1:idx2));
 end
 Rn_moving_av=yy';
-Rn_moving_av_uncert=Rn_moving_av.*(1./(max(1,6*Rn_moving_av/100)).^0.5);
+Rn_moving_av_uncert=Rn_moving_av.*(1./(max(1,3*Rn_moving_av/100)).^0.5);
 
 % re do the 24h moving average (RN_test) to test my calculations
 step=0;
