@@ -152,11 +152,11 @@ for n=find(~isnan(Rn))'
 end
 close(h)
 
-% calculate the 6h moving average
+% calculate the moving average
 y=Rn2_every5min';
 yy=Rn2_every5min';
-span=6*60*60/median(diff(posix_time_every5min));
-moving_av_label='6h moving average';
+span=3*60*60/median(diff(posix_time_every5min));
+moving_av_label='3h moving average';
 if mod(span,2)==0
     span=span+1;
 end
@@ -422,7 +422,7 @@ xlabel('CET summer time')
 
 %% Plot radon for B/W print in my laptop
 if mylaptop>0
-    figure('units','normalized','outerposition',[0 0 1 1],'Name','Radon raw data')
+    figure('units','normalized','outerposition',[0 0 1 1],'Name','Radon data')
 set(gcf,'color','w');
 hold on
 
