@@ -3,6 +3,9 @@ clc
 clear
 close all hidden
 
+% check if octave
+isOctave = exist('OCTAVE_VERSION', 'builtin') ~= 0;
+
 disp('----------------------')
 disp('Airthings Wave plotter')
 disp('Angel Rodes, 2022')
@@ -53,8 +56,13 @@ disp(['Radon data file: ' selectedfile])
 % mydata = textscan(fid, '%s %f %f %f %f %f %f ',...
 %     'HeaderLines', 1,'Delimiter',';');
 % 2022-09-22T10:10:33;;25.61;47.50;986.00;547.00;46.00
-mydata = textscan(fid, '%f-%f-%fT%f:%f:%f %f %f %f %f %f %f ',...
-    'HeaderLines', 1,'Delimiter',';');
+if isOctave % ignore last column
+  mydata = textscan(fid, '%f-%f-%fT%f:%f:%f %f %f %f %f %f %*[^\n] ',...
+  'HeaderLines', 1,'Delimiter',';', 'EndOfLine', '\n');
+else
+  mydata = textscan(fid, '%f-%f-%fT%f:%f:%f %f %f %f %f %f %f ',...
+  'HeaderLines', 1,'Delimiter',';');
+end
 fclose(fid);
 input.yyyy=mydata{1};
 input.MM=mydata{2};
@@ -67,7 +75,13 @@ input.T=mydata{8};
 input.H=mydata{9};
 input.P=mydata{10};
 input.CO2=mydata{11};
+% input.VOC=mydata{12};
+if isOctave
+input.VOC=input.CO2.*NaN;
+else
 input.VOC=mydata{12};
+end
+
 
 % get posix and yyyyMMddHHmmss times
 input.posix_time=input.yyyy.*0+NaN;
@@ -100,6 +114,7 @@ end
 
 disp(['    First data: ' num2str(input.numeric_time(1))])
 disp(['    Last update: ' num2str(input.numeric_time(end))])
+disp(['    Size: ' num2str(size(input.numeric_time))])
 
 
 timestrings=input.numeric_time;
