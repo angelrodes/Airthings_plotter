@@ -249,7 +249,7 @@ Rn2_index=find(~isnan(Rn))';
 Rn_test=zeros(size(Rn))*NaN;
 for n=find(~isnan(Rn))'
     step=step+1;
-    Rn_test(n)=mean(posix_time_every5min<posix_time(n) & posix_time_every5min>posix_time(n)-24*60*60);
+    Rn_test(n)=mean(Rn2_every5min(posix_time_every5min<posix_time(n) & posix_time_every5min>posix_time(n)-24*60*60));
 end
 
 %% ask for days to plot
@@ -307,7 +307,7 @@ for plot_number=1:6
     
     ylabel(title_string)
     
-    xticks(posix_time(newday==1))
+    xticks(model.posix_time_ticks)
     
     % if plot_number==6
     %     xticklabels(timestrings(newday==1))
@@ -347,7 +347,8 @@ text(min(posix_time_limits),2,'Day ', 'HorizontalAlignment', 'right','Color','k'
 text(min(posix_time_limits),1,'Hour ', 'HorizontalAlignment', 'right','Color','k')
 xlim(posix_time_limits)
 ylim([0 4])
-xticks(posix_time(newday==1))
+% xticks(model.posix_time_ticks)
+xticks(model.posix_time_ticks)
 xticklabels([])
 yticks([])
 yticklabels([])
@@ -361,8 +362,8 @@ figure('units','normalized','outerposition',[0 0 1 1],'Name','Radon raw data')
 set(gcf,'color','w');
 hold on
 
-subplot(7,1,[1 6])
-hold on
+% subplot(7,1,[1 6])
+% hold on
 
 valid=~isnan(Rn);
 plot(posix_time(valid),Rn(valid),'-b','LineWidth',2)
@@ -384,81 +385,63 @@ plot(posix_time_every5min(valid),Rn_moving_av(valid)-Rn_moving_av_uncert(valid),
 
 xlim(posix_time_limits)
 % ylim(Rn2_limits)
-ylim([-5 max(Rn_moving_av)])
+ylim([-220 max(Rn_moving_av)])
 
 box on
 grid on
 
 ylabel('Rn [Bq/m^3]')
-xticks(posix_time(newday==1))
+xticks(model.posix_time_ticks)
 xticklabels([])
 
 % timestamps
-subplot(7,1,7)
+% subplot(7,1,7)
 hold on
 for n=1:size(year_month_day_hour,1)
         if n==1
             for j=1:3
-                text(posix_time(n),5-j,num2str(year_month_day_hour(n,j)),'Color','b')
+                text(posix_time(n),(5-j)*200/5*(-1),num2str(year_month_day_hour(n,j)),'Color','k')
             end
         elseif n<size(year_month_day_hour,1)
             for j=1:4
                 if year_month_day_hour(n,j)~=year_month_day_hour(n-1,j)
                     if j<4
-                        text(posix_time(n),5-j,num2str(year_month_day_hour(n,j)),'Color','b')
+                        text(posix_time(n),(5-j)*200/5*(-1),num2str(year_month_day_hour(n,j)),'Color','k')
                     else
                         if year_month_day_hour(n,j)==23 % CET winter time
-                            text(posix_time(n),5-j,'0','Color','b', 'HorizontalAlignment', 'center')
+                            text(posix_time(n),(5-j)*200/5*(-1),'0','Color','k', 'HorizontalAlignment', 'center')
                         elseif year_month_day_hour(n,j)==5
-                            text(posix_time(n),5-j,'6','Color','b', 'HorizontalAlignment', 'center')
+                            text(posix_time(n),(5-j)*200/5*(-1),'6','Color','k', 'HorizontalAlignment', 'center')
                         elseif year_month_day_hour(n,j)==11
-                            text(posix_time(n),5-j,'12','Color','b', 'HorizontalAlignment', 'center')
+                            text(posix_time(n),(5-j)*200/5*(-1),'12','Color','k', 'HorizontalAlignment', 'center')
                         elseif year_month_day_hour(n,j)==17
-                            text(posix_time(n),5-j,'18','Color','b', 'HorizontalAlignment', 'center')
+                            text(posix_time(n),(5-j)*200/5*(-1),'18','Color','k', 'HorizontalAlignment', 'center')
                         end
                     end
                 end
             end
-%             if day_in_week(n)~=day_in_week(n-1)
-%                 switch day_in_week(n)
-%                     case 1
-%                         text(posix_time(n),5,'Sun.','Color','r')
-%                     case 2
-%                         text(posix_time(n),5,'Mon.','Color','k')
-%                     case 3
-%                         text(posix_time(n),5,'Tue.','Color','k')
-%                     case 4
-%                         text(posix_time(n),5,'Wed.','Color','k')
-%                     case 5
-%                         text(posix_time(n),5,'Thu.','Color','k')
-%                     case 6
-%                         text(posix_time(n),5,'Fri.','Color','k')
-%                     case 7
-%                         text(posix_time(n),5,'Sat.','Color','r')
-%                     otherwise
-%                         text(posix_time(n),5,'???','Color','r')
-%                 end
-%                 
-%             end
+
         else
             for j=1:3
-                text(posix_time(n),5-j,num2str(year_month_day_hour(n,j)),'Color','b')
+                text(posix_time(n),(5-j)*200/5*(-1),num2str(year_month_day_hour(n,j)),'Color','k')
             end
         end
-    end
-text(min(posix_time_limits),4,'Year ', 'HorizontalAlignment', 'right','Color','k')
-text(min(posix_time_limits),3,'Month ', 'HorizontalAlignment', 'right','Color','k')
-text(min(posix_time_limits),2,'Day ', 'HorizontalAlignment', 'right','Color','k')
-text(min(posix_time_limits),1,'Hour ', 'HorizontalAlignment', 'right','Color','k')
+end
+text(min(posix_time_limits),4*200/5*(-1),'Year ', 'HorizontalAlignment', 'right','Color','k')
+text(min(posix_time_limits),3*200/5*(-1),'Month ', 'HorizontalAlignment', 'right','Color','k')
+text(min(posix_time_limits),2*200/5*(-1),'Day ', 'HorizontalAlignment', 'right','Color','k')
+text(min(posix_time_limits),1*200/5*(-1),'Hour ', 'HorizontalAlignment', 'right','Color','k')
 xlim(posix_time_limits)
-ylim([0 4])
-xticks(posix_time(newday==1))
-xticklabels([])
-yticks([])
-yticklabels([])
-grid on
-set(gca, 'YColor','w');
+% ylim([0 4])
+% xticks(model.posix_time_ticks)
+% xticklabels([])
+% yticks([])
+% yticklabels([])
+% grid on
+% set(gca, 'YColor','w');
 xlabel('CET winter time')
+
+yticks([0:100:1000,1200:200:3000,4000:1000:100000])
 
 %% test scatter and compare with assumption (1 count per hour for each 100 Bq/m3)
 %figure
@@ -517,7 +500,7 @@ box on
 grid on
 
 ylabel('Rn [Bq/m^3]')
-xticks(posix_time(newday==1))
+xticks(model.posix_time_ticks)
 xticklabels([])
 
 % timestamps
@@ -579,7 +562,8 @@ text(min(posix_time_limits),2,'Day ', 'HorizontalAlignment', 'right','Color','k'
 text(min(posix_time_limits),1,'Hour ', 'HorizontalAlignment', 'right','Color','k')
 xlim(posix_time_limits)
 ylim([0 4])
-xticks(posix_time(newday==1))
+% xticks(model.posix_time_ticks)
+xticks(model.posix_time_ticks)
 xticklabels([])
 yticks([])
 yticklabels([])
