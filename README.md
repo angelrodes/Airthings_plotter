@@ -57,9 +57,9 @@ However, some of us are very impatient and want to use their porduts to test the
 
 As these detectors calculate the Radon concentrations based on alpha particle counting, the **precission** of the measurments will be affected by counting statistics. Therefore, to estimate the uncertainty of the short term measurements, I will assume that the uncertainty will be reresented by the formula ```100/N^0.5```, where ```N``` is the number of events (alpha decays) counted by the detector.
 
-If we assume a conserviative precision of 10% on the reported 24h measurements, "instant" 1h-data should yield about 50% uncertainties. Obviusly, this uncertainty shuld decrease with higher Radon concentrations. In our initial tests, the scatter of the generated 1h-data seem to rougly reflect these 50% uncertainties for values around 500 Bq/m3 (see last plot above). This implies that, *very rougly*, 1 event is detected per hour for each 100 Bq/m3 concentration.
+If we assume a conserviative precision of [10% on the reported 24h measurements](https://help.airthings.com/en/articles/3727185-i-have-2-monitors-beside-each-other-and-they-show-different-radon-values-how-is-that-possible), "instant" 1h-data should yield about 50% uncertainties. Obviusly, this uncertainty shuld decrease with higher Radon concentrations. In our initial tests, the scatter of the generated 1h-data seem to rougly reflect these 50% uncertainties for values around 500 Bq/m3 (see last plot above). This implies that, *very rougly*, 1 event is detected per hour for each 100 Bq/m3 concentration. This value correspond to an effective detection chamber of c. 3 cubic centimeters.
 
-Scatter of teh "1h data" in our initial tests and assumed uncertainty based on 1 count per 100 Bq/m3:
+Scatter of the "1h data" in our initial tests and assumed uncertainty based on 1 count per 100 Bq/m3:
 
 ![image](https://user-images.githubusercontent.com/53089531/192155481-4bb32e3d-6e3a-43b5-9bd9-f633d1359bd3.png)
 
