@@ -19,7 +19,7 @@ disp('    https://dashboard.airthings.com/devices/')
 % first check if this is my computer
 [ret, name] = system('hostname');
 
-if strcmp(name(1:15),'angel-EliteBook')==1
+if strcmp(name(1:15),'angel-EliteBook')==1 || strcmp(name(1:15),'angel-office217')==1
     mylaptop=1;
 elseif strcmp(name(1:14),'angel-Inspiron')==1
     mylaptop=2;
@@ -289,14 +289,13 @@ for plot_number=1:6
     
     % plot
     subplot(7,1,plot_number)
-    hold on
-    valid=~isnan(values);
-    plot(posix_time(valid),values(valid),'-b','LineWidth',2)
+    hold on 
     if plot_number==1 % plot instant Rn2 as dots
         valid=~isnan(Rn2_every5min);
         plot(posix_time_every5min(valid),Rn2_every5min(valid),'.r')
     end
-    
+    valid=~isnan(values);
+    plot(posix_time(valid),values(valid),'-b','LineWidth',2)
     xlim(posix_time_limits)
     ylim(values_limits)
     
@@ -385,7 +384,7 @@ plot(posix_time_every5min(valid),Rn_moving_av(valid)-Rn_moving_av_uncert(valid),
 
 xlim(posix_time_limits)
 % ylim(Rn2_limits)
-ylim([-220 max(Rn_moving_av)])
+ylim([-220  min(5000,max(Rn_moving_av))])
 
 box on
 grid on
@@ -399,7 +398,7 @@ xticklabels([])
 hold on
 for n=1:size(year_month_day_hour,1)
         if n==1
-            for j=1:3
+            for j=1:4
                 text(posix_time(n),(5-j)*200/5*(-1),num2str(year_month_day_hour(n,j)),'Color','k')
             end
         elseif n<size(year_month_day_hour,1)
@@ -422,7 +421,7 @@ for n=1:size(year_month_day_hour,1)
             end
 
         else
-            for j=1:3
+            for j=1:4
                 text(posix_time(n),(5-j)*200/5*(-1),num2str(year_month_day_hour(n,j)),'Color','k')
             end
         end
@@ -439,7 +438,7 @@ xlim(posix_time_limits)
 % yticklabels([])
 % grid on
 % set(gca, 'YColor','w');
-xlabel('CET winter time')
+xlabel('CET winter time (UTC+1)')
 
 yticks([0:100:1000,1200:200:3000,4000:1000:100000])
 
@@ -492,7 +491,7 @@ plot(posix_time_every5min(valid),Rn_moving_av(valid)-Rn_moving_av_uncert(valid),
 
 xlim(posix_time_limits)
 % ylim(Rn2_limits)
-ylim([-5 max(Rn_moving_av)])
+ylim([-5 min(5000,max(Rn_moving_av))])
 
 title(moving_av_label)
 
@@ -517,13 +516,13 @@ for n=1:size(year_month_day_hour,1)
                     if j<4
                         text(posix_time(n),5-j,num2str(year_month_day_hour(n,j)),'Color','b')
                     else
-                        if year_month_day_hour(n,j)==22 % CET summer time
+                        if year_month_day_hour(n,j)==0 % UTC time
                             text(posix_time(n),5-j,'0','Color','b', 'HorizontalAlignment', 'center')
-                        elseif year_month_day_hour(n,j)==4
+                        elseif year_month_day_hour(n,j)==6
                             text(posix_time(n),5-j,'6','Color','b', 'HorizontalAlignment', 'center')
-                        elseif year_month_day_hour(n,j)==10
+                        elseif year_month_day_hour(n,j)==12
                             text(posix_time(n),5-j,'12','Color','b', 'HorizontalAlignment', 'center')
-                        elseif year_month_day_hour(n,j)==16
+                        elseif year_month_day_hour(n,j)==18
                             text(posix_time(n),5-j,'18','Color','b', 'HorizontalAlignment', 'center')
                         end
                     end
@@ -569,7 +568,7 @@ yticks([])
 yticklabels([])
 grid on
 set(gca, 'YColor','w');
-xlabel('CET summer time')
+xlabel('UTC time')
 end
 
 
