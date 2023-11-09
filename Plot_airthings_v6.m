@@ -191,6 +191,7 @@ end
 % interpolate to have Rn data every 5 minutes
 posix_time_every5min=model.posix_time;
 valid=~isnan(Rn);
+A=posix_time; [v, w] = unique( A, 'stable' );duplicate_indices = setdiff( 1:numel(A), w ); valid(duplicate_indices)=0; % remove duplicates
 Rn_every5min=interp1(posix_time(valid),Rn(valid),posix_time_every5min,'linear','extrap')';
 
 %% Undo the Rn 24h average (inverse moving average)
